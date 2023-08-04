@@ -1,0 +1,35 @@
+<link rel="stylesheet" href="/css/profile-page.css" type="text/css">
+
+<script src="/js/profile-page.js"></script>
+
+<div class="container  mt-5">
+  <div class="row justify-content-center ">
+    <div
+      class="col-md-5  d-flex align-items-center justify-content-center flex-column p-5 shadow-lg   bg-warning rounded">
+
+
+      <h2 class="user-name d-flex justify-content-center ">
+        <%= user.name.toUpperCase() %>
+      </h2>
+      
+      <img class="user-image "
+        src="<%= user.profilePictureURL %>"
+        alt="User Image" />
+      <p class="user-email d-flex justify-content-center ">
+        <%= user.email %>
+      </p>
+
+      <% if (local == true) {%>
+        <div class="row">
+          <a id="reset" href="/reset-password">
+            <h6>Reset Password</h6>
+          </a>
+        </div>
+
+        <%}%>
+
+
+
+    </div>
+  </div>
+</div>

@@ -63,7 +63,7 @@ app.use(session({
     // },
     store: mongoStore.create(
     {
-        mongoUrl:'mongodb://127.0.0.1:27017/UserAuthentication',
+        mongoUrl:process.env.mongodb,
         // autoRemove: 'disabled'
         ttl: 1000*60*60*24*7,   // TTL of the session cookie (1 week in milliseconds)
     },(err) =>{

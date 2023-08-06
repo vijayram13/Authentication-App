@@ -57,15 +57,15 @@ app.use(session({
     secret: process.env.SESSIONSECRET, // TODO: change the secret before deployment in production mode
     saveUninitialized: false, // Whether to save uninitialized sessions (false recommended to comply with GDPR laws)
     resave: false,  // Whether to save the session if it's not modified (false recommended for optimization)
-    // cookie: {
-    //     //validation time of cookie
-    //     maxAge: (1000*60) // Expiration time of the session cookie in milliseconds 
-    // },
+    cookie: {
+        //validation time of cookie
+        maxAge: (1000*60*10) // Expiration time of the session cookie in milliseconds 
+    },
     store: mongoStore.create(
     {
         mongoUrl:process.env.mongodb,
-        // autoRemove: 'disabled'
-        ttl: 1000*60*60*24*7,   // TTL of the session cookie (1 week in milliseconds)
+        // autoRemove: 'native',
+        ttl: 4*60,   // TTL of the session cookie (in second)
     },(err) =>{
         console.log("Mongoose Error: " + err);
     })

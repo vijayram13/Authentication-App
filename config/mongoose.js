@@ -5,7 +5,7 @@ mongoose.connect(cloudDB,{
     useNewUrlParser: true,
     useUnifiedTopology: true,
 })
-.then(() =>{console.log("Cloud MongoDB connected Successfully..");})
+.then(() =>{console.log("Cloud MongoDB connected");})
 .catch((err) =>{console.log("Cloud MongoDB is not connected",err);});
 
 

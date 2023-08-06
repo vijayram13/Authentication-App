@@ -2,7 +2,12 @@ const express = require('express');
 const router = express.Router();
 const passport = require('passport');
 
+
+// user controler
 const controller = require('../controller/userController');
+
+// mailer controller
+const mailerController = require("../controller/mailerController");
 
 // loginPage 
 router.get('/', controller.home);
@@ -26,6 +31,8 @@ router.post('/signin',
     {failureRedirect: '/login'}),
     controller.userSession);
 
+// sent auto generate password to the user mail
+router.post("/send-mail",mailerController.send);
 
 // reset password
 router.get('/reset-password', controller.resetPassword);

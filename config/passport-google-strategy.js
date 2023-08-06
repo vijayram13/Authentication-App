@@ -13,11 +13,11 @@ passport.use(new GoogleStrategy(
         callbackURL: process.env.callbackURL
 
     },
-    function(accessToken, refreshToken,profile,cb) {
+    function(req,accessToken, refreshToken,profile,cb) {
         User.findOne({email: profile.emails[0].value})
         .then((user) => {
             if(user){
-                // console.log("Login Successful");
+                //console.log("Login Successful");
                 return cb(null, user);
             }
             else{
@@ -25,14 +25,15 @@ passport.use(new GoogleStrategy(
                 User.create({
                     name: profile.displayName,
                     email: profile.emails[0].value,
-                    password: crypto.randomBytes(20).toString('hex'),
+                    password: crypto.randomBytes(10).toString('hex'),
                     profilePictureURL: profile.photos[0].value
                 })
                 .then((user,err) => {
                     if(err){
-                        if (err){console.log('Error in creating user google strategy-passport', err); return;}
-                        return done(null, user);
+                        req.flash('error',"Invalid !");
+                        console.log('Error in creating user google strategy-passport', err); return;
                     }
+                    return cb(null, user);
                 });
 
             }

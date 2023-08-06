@@ -41,21 +41,15 @@ module.exports.send = async(req,res) => {
         })
         .then((err,info) => {
             if (err) {
-                console.log("nodemailer Error: ",err);
+                return console.log("nodemailer Error: ",err);
             }
-            else{
-                console.log("Nodemailer Info: ",info);
-                // update the user password
-                
-            }
+            
         })
         .catch((err)=>{
             console.log(err);
         });
     }
-    else{
-        console.log("No user found");
-    }
+    
     
     
     req.flash("success","Mail Sent Successfully");

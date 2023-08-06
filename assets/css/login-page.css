@@ -1,7 +1,10 @@
 #main-box {
   height: auto !important;
 }
-
+/* hide signout btn */
+#user{
+  display: none
+}
 .card {
   background-color: #e9ecef;
   border: var(--bs-card-border-width) solid #ffc107;
@@ -57,8 +60,28 @@ a{
   width: 20px;
   position: absolute;
   z-index: 99;
-  left: 12px;
+  left: 10px;
   bottom: 9px;
+}
+
+
+
+.password {
+  width: 20px;
+  position: absolute;
+  z-index: 99;
+  right: 10px;
+  bottom: 9px;
+}
+/* check box */
+.form-check-input:checked {
+  background-color: #fd7e14;
+  border-color: #fd7e14;
+}
+.form-check-input:focus {
+  border-color: rgb(253, 126, 20);
+  outline: 0;
+  box-shadow: 0 0 0 0.25rem rgba(253, 125, 20, 0.516);
 }
 
 .input_label {

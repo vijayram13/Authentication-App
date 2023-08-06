@@ -12,11 +12,14 @@ const passport = require('passport');
 
 // redirect ("/")
 module.exports.home = (req, res) => {
+    if (req.isAuthenticated()) {
+        return res.redirect("/profile"); 
+    }
     
-    res.render('login-page', {
+    return res.render('login-page', {
         title: 'login',
-        log: "Sign Up",
-        link: '/signup',
+        log: "",
+        link: '',
     });
 };
 
@@ -27,7 +30,7 @@ module.exports.signup = (req, res) => {
         return res.redirect('/profile');
     }
 
-    res.render('signup-page', {
+    return res.render('signup-page', {
         title: 'signup',
         log: 'Sign in',
         link: '/login'
@@ -36,7 +39,6 @@ module.exports.signup = (req, res) => {
 
 //create a new user using signup form
 module.exports.createUser = (req, res) => {
-    // console.log(req.body)
 
     // password and confirm password not matching
     if (req.body.password != req.body.conf_password) {
@@ -103,7 +105,7 @@ module.exports.login = function (req, res,next) {
         return res.redirect('/profile');
     }
     req.flash('error',"Invalid Email/Password")
-    return res.redirect('/');
+    return res.redirect('back');
 
 };
 

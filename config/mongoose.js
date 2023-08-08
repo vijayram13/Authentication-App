@@ -1,12 +1,14 @@
+// import mongoose
 const mongoose = require('mongoose');
 
+// Mongodb url to connect  the database
 const cloudDB = process.env.mongodb;
 mongoose.connect(cloudDB,{
     useNewUrlParser: true,
     useUnifiedTopology: true,
 })
-.then(() =>{console.log("Cloud MongoDB connected");})
-.catch((err) =>{console.log("Cloud MongoDB is not connected",err);});
+.then(() =>{return;})
+.catch((err) =>{console.log("DB is not connected",err);});
 
 
 

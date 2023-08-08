@@ -1,9 +1,6 @@
 const express = require('express');
-
 //for encryption
 const bcrypt = require('bcrypt');  
-
-
 // user model call
 const userModel = require('../models/userModel');
 // passport middleware
@@ -15,12 +12,9 @@ module.exports.home = (req, res) => {
     if (req.isAuthenticated()) {
         return res.redirect("/profile"); 
     }
+    return res.redirect("/login");
     
-    return res.render('login-page', {
-        title: 'login',
-        log: "",
-        link: '',
-    });
+    
 };
 
 //Signup page
@@ -33,7 +27,7 @@ module.exports.signup = (req, res) => {
     return res.render('signup-page', {
         title: 'signup',
         log: 'Sign in',
-        link: '/login'
+        link: '/'
     });
 };
 
@@ -42,7 +36,7 @@ module.exports.createUser = (req, res) => {
 
     // password and confirm password not matching
     if (req.body.password != req.body.conf_password) {
-        // console.log("Password and confirm password not matching");
+        
         req.flash('error',"Password not match");
         return res.redirect('back');
     }
@@ -104,8 +98,13 @@ module.exports.login = function (req, res,next) {
     if (req.isAuthenticated()) {
         return res.redirect('/profile');
     }
-    req.flash('error',"Invalid Email/Password")
-    return res.redirect('back');
+    return res.render('login-page', {
+        title: 'login',
+        log: "",
+        link: '',
+    });
+    
+    
 
 };
 
@@ -118,7 +117,6 @@ module.exports.userSession = function (req, res) {
             if (user) {
                 const isMatch = bcrypt.compareSync(req.body.password, user.password);
                 if (isMatch) {
-                    
                     req.flash('success', "Logged in successfully");
                     return res.redirect("/profile");
 
@@ -129,6 +127,7 @@ module.exports.userSession = function (req, res) {
                 }
       
             }
+            
          
         })
         .catch((err) => { 
@@ -142,8 +141,7 @@ module.exports.userSession = function (req, res) {
 //profile page
 module.exports.profile = (req, res) => {
     if (req.isAuthenticated()) {
-        // console.log(req.user);
-
+        
         return res.render('profile-page', {
             title: 'profile',
             log: "Sign Out",
@@ -159,7 +157,7 @@ module.exports.profile = (req, res) => {
 
 //SignOut 
 module.exports.signOut = function (req, res) {
-    // res.cookie("user_id", "")
+    // to logout the user 
     req.logout((err) => {
 
         if (err) {

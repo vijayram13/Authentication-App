@@ -86,5 +86,5 @@ app.use(require('./routes/routes'));
 
 app.listen(port,(err) =>{
     if(err){return console.log(port," Server not Listening");}
-    return console.log(`server listening on ${port}`);
+    // return console.log(`server listening on ${port}`);
 });

@@ -8,20 +8,17 @@ const userModel = require('../models/userModel');
 const bcrypt = require('bcrypt');  
 const nodeMailer = require("../config/nodemailer");
 
-
-
 // create password for user  
 function generatePassword(length) {
     const randomBytes = crypto.randomBytes(length);
-    return randomBytes.toString("hex"); // or 'base64' for base64 encoding
+    // return auto generate password
+    return randomBytes.toString("hex"); 
   }
   
 
 
-
 module.exports.send = async(req,res) => {
-    console.log(req.body);
-    console.log(process.env.DOMAIN);
+    
     // genrate password for user
     const generate = generatePassword(4);
 
@@ -39,9 +36,9 @@ module.exports.send = async(req,res) => {
             html: `<p>Hello ${user.name} your new password: <b>${generate}</b></p>`
                 
         })
-        .then((err,info) => {
-            if (err) {
-                return console.log("nodemailer Error: ",err);
+        .then((user) => {
+            if (user) {
+                return ;
             }
             
         })

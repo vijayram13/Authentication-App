@@ -4,7 +4,6 @@ const bcrypt = require('bcrypt');
 // db model call
 const userModel = require('../models/userModel');
 
-
 // local Strategy call rom passportjs
 const LocalStrategy = require('passport-local').Strategy;
 
@@ -12,30 +11,32 @@ const LocalStrategy = require('passport-local').Strategy;
 passport.use(new LocalStrategy(
     { 
         usernameField: 'email',
-        // passReqToCallback: true     //to add a praameter request 
+        passReqToCallback: true     //to add a  request as parameter
     },
     
-    (email, password,done) => {
+    (req,email, password,done) => {
         userModel.findOne({ email: email })
             .then((user, err) => {
-                
+    
                 // if error occurs during finding the user
                 if (err) {
                     
                     return done(err);
                 };
                 
-                if (!user) {return done(null, false);}
+                if (!user || user == null) {
+                    req.flash("error", "Invalid Email/Password");
+                    return done(null, false);
+                }
                 // compare password with db password
                 const isMatch = bcrypt.compareSync(password, user.password);
                 
                 if (isMatch === false) {
-                    // console.log('Password is incorrect',req.flash);
-
+                    
+                    req.flash("error", "Invalid Email/Password");
                     return done(null, false);
                 }
-                
-                
+                // return user if found
                 return done(null, user);
 
             })
@@ -63,17 +64,16 @@ passport.deserializeUser(function (id, done) {
 //check if the user is  authenticated 
 passport.checkAuthentication = function (req, res, next) {
     if (req.isAuthenticated()) {
-        //console.log("User is authenticated",req.isAuthenticated());
         return next();
     }
-    //console.log("User is not authenticated");
+    // redirect to login page if user is not authenticated
     return res.redirect('back');
 };
 
 // set the user to locals
 passport.setAuthenticatedUser = function (req, res, next) {
     if (req.isAuthenticated()) {
-        //console.log("i am here....",req.cookies);
+        // store user in locals to use it views or anywhere
         res.locals.user = req.user;
     }
     return next();

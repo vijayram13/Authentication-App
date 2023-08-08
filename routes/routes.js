@@ -39,13 +39,13 @@ router.get('/reset-password', controller.resetPassword);
 router.post('/reset-password', controller.reset);
 
 
-
 // google Oauth routes
 router.get(
     "/auth/google",
     passport.authenticate("google", { scope: ["profile", "email"] })
 );
 
+// to redirect to profile page
 router.get(
     "/auth/google/callback",
     passport.authenticate("google", { failureRedirect: "/login" }),
@@ -55,4 +55,6 @@ router.get(
         
     }
 );
+
+// export routes
 module.exports = router;

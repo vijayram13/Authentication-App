@@ -165,7 +165,7 @@ module.exports.signOut = function (req, res) {
             return res.redirect('/');
         }
         req.flash("success", "Signed Out Successfully");
-        return res.redirect('/');
+        return res.redirect('/login');
     });
 
 }

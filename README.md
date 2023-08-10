@@ -1,4 +1,3 @@
-<h1 align="center">Hi 👋, I'm Vijay Ram Soren</h1>
 
 <h1> Authentication-App</h1>
 

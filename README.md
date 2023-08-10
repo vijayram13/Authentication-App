@@ -27,10 +27,10 @@
 
 ## Hosting site
 
-- [Authentication App](https://authenticationapp-w0sa.onrender.com/login)
+- Authentication App: (https://authenticationapp-w0sa.onrender.com/login)
 
 ## Authors
 
-- [@vijayram13](https://github.com/vijayram13)
+- [Vijay Ram Soren](https://github.com/vijayram13)
 
 

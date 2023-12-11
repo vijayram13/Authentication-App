@@ -1,5 +1,5 @@
 {
-  "name": "authentication_app",
+  "name": "index.js",
   "version": "1.0.0",
   "description": "for user authentication",
   "main": "index.js",
